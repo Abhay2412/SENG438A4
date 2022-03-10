@@ -4,10 +4,10 @@
 
 | Group \#:       |   |
 |-----------------|---|
-| Student Names:  |   |
-|                 |   |
-|                 |   |
-|                 |   |
+| Student Names:  | Lauraine Baffot  |
+|                 | Alexis Hamrak  |
+|                 | Abhay Kholsa  |
+|                 | Rachel Renegado  |
 
 # Introduction
 
