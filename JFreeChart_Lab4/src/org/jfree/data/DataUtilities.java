@@ -1,4 +1,3 @@
-/* ===========================================================
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
@@ -121,6 +120,9 @@ public abstract class DataUtilities {
      * @return The total of the values in the specified column.
      */
     public static double calculateColumnTotal(Values2D data, int column) {
+    	if(column < 0) {
+    		throw new IllegalArgumentException();
+    	}
         ParamChecks.nullNotPermitted(data, "data");
         double total = 0.0;
         int rowCount = data.getRowCount();
