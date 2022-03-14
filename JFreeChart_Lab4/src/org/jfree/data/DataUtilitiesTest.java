@@ -961,7 +961,7 @@ public class DataUtilitiesTest {
 				will(returnValue(4));
 				// will always returns 4 when getColumnCount() is called
 
-				one(values).getValue(1, 0);
+				one(values).getValue(0, 1);
 				// invocation of getValue(1, 0) is expected once
 				will(returnValue(1.0));
 				// will always returns 1 when getValue(1, 0) is called
@@ -971,12 +971,12 @@ public class DataUtilitiesTest {
 				will(returnValue(2.0));
 				// will always returns 2 when getValue(1, 1) is called
 
-				one(values).getValue(1, 2);
+				one(values).getValue(2, 1);
 				// invocation of getValue(1, 2) is expected once
 				will(returnValue(3.0));
 				// will always returns 3 when getValue(1, 2) is called
 
-				one(values).getValue(1, 3);
+				one(values).getValue(3, 1);
 				// invocation of getValue(1, 3) is expected once
 				will(returnValue(4.0));
 				// will always returns 4 when getValue(1, 3) is called
@@ -986,7 +986,7 @@ public class DataUtilitiesTest {
 		final int[] validColumnsToPass = { 1 }; //This is the valid columns which in this mock object are just one column 
 		double result = DataUtilities.calculateRowTotal(values, rowNumber, validColumnsToPass);
 		// calling calculateRowTotal with Values2D = values and at rowNumber 1 and the columns which are correct in this object only 1. 
-		assertEquals("The row total is adding up to 10", 10, result, .000000001d);
+		assertEquals("The row total is adding up to 2.0", 2.0, result, .000000001d);
 		// asserting the result adds up to 10 (1 + 2 + 3 + 4 = 10) for the three parameter version 
 	}
 
