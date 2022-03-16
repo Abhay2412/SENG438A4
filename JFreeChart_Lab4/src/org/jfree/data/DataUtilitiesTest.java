@@ -772,33 +772,47 @@ public class DataUtilitiesTest {
 
 	// ------------- getCumulativePercentages(KeyedValues data) Tests -----------
 	/**
-	 *This test will create a mock object of the type KeyedValues with it's key and the values of the it. 
-	 *Later then this will be passed into getCumulativePercentage for these values which are inside the keys, 
-	 *and it expects the percentage will be calculated properly and with accuracy as well. 
+	 * This test will create a mock object of the type KeyedValues with it's key and
+	 * the values of the it. Later then this will be passed into
+	 * getCumulativePercentage for these values which are inside the keys, and it
+	 * expects the percentage will be calculated properly and with accuracy as well.
 	 */
 	@Test
 	public void cumulativePercentageForIndexZeroSixteen() {
 		Mockery mockingContext = new Mockery(); // This here is creating a new mock object called mockingContext.
-		final KeyedValues data = mockingContext.mock(KeyedValues.class); //Using the mock object in the stored value above locally
-		//and creating another local object data which is the type of final and KeyedValues.
+		final KeyedValues data = mockingContext.mock(KeyedValues.class); // Using the mock object in the stored value
+																			// above locally
+		// and creating another local object data which is the type of final and
+		// KeyedValues.
 
-		mockingContext.checking(new Expectations() { //This is the start of the mock expectation block in where we use will to ensure the 
-			//proper values are being returned.
+		mockingContext.checking(new Expectations() { // This is the start of the mock expectation block in where we use
+														// will to ensure the
+			// proper values are being returned.
 			{
-				atLeast(1).of(data).getItemCount(); //Here we call the ItemCount to get the number of values which will be passed in. 
-				will(returnValue(2)); //We pass in the return value of 2 which will be returned whenever getItemCount is called. 
+				atLeast(1).of(data).getItemCount(); // Here we call the ItemCount to get the number of values which will
+													// be passed in.
+				will(returnValue(2)); // We pass in the return value of 2 which will be returned whenever getItemCount
+										// is called.
 
-				atLeast(1).of(data).getValue(0); //This is calling the getValue method of data and that at minimum there is a value at 0.
-				will(returnValue(1.0)); //The return value will always be 1.0 when the getValue(0) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getValue(0); // This is calling the getValue method of data and that at minimum
+													// there is a value at 0.
+				will(returnValue(1.0)); // The return value will always be 1.0 when the getValue(0) is called ensuring
+										// the mock object is built correctly.
 
-				atLeast(1).of(data).getValue(1); //This is calling the getValue method of data and that at minimum there is a value at 1.
-				will(returnValue(5.0)); //The return value will always be 5.0 when the getValue(1) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getValue(1); // This is calling the getValue method of data and that at minimum
+													// there is a value at 1.
+				will(returnValue(5.0)); // The return value will always be 5.0 when the getValue(1) is called ensuring
+										// the mock object is built correctly.
 
-				atLeast(1).of(data).getKey(0); //This is calling the getKey method of data and that at minimum there is a key placed at 0.
-				will(returnValue(25.0)); //The return value will always be 25.0 when the getKey(0) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getKey(0); // This is calling the getKey method of data and that at minimum there is
+												// a key placed at 0.
+				will(returnValue(25.0)); // The return value will always be 25.0 when the getKey(0) is called ensuring
+											// the mock object is built correctly.
 
-				atLeast(1).of(data).getKey(1); //This is calling the getKey method of data and that at minimum there is a key placed at 1.
-				will(returnValue(26.0));  //The return value will always be 26.0 when the getKey(1) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getKey(1); // This is calling the getKey method of data and that at minimum there is
+												// a key placed at 1.
+				will(returnValue(26.0)); // The return value will always be 26.0 when the getKey(1) is called ensuring
+											// the mock object is built correctly.
 
 			}
 		});
@@ -806,130 +820,201 @@ public class DataUtilitiesTest {
 		// at the index of 0 and then does 25/6 where 25 is the running total and 6 is
 		// the total from all of the values
 		// So 25/6 = 4.166666667 - 4 = 0.166666667 * 100 which is 16.6 percent(16.6%)
-		KeyedValues result = DataUtilities.getCumulativePercentages(data); //Calls the getCumulativePercentage method to pass in the data 
-		//which is created by the mock objects and is being stored in a local variable result. 
+		KeyedValues result = DataUtilities.getCumulativePercentages(data); // Calls the getCumulativePercentage method
+																			// to pass in the data
+		// which is created by the mock objects and is being stored in a local variable
+		// result.
 		assertEquals("The value at the index of 0 is 0.166666667", 0.166666667, result.getValue(0).doubleValue(),
-				.000000001d); //Asserting that the value is correct at the index of 0 which is 16.6% of the percentage added up.
+				.000000001d); // Asserting that the value is correct at the index of 0 which is 16.6% of the
+								// percentage added up.
 	}
+
 	/**
-	 *This test will create a mock object of the type KeyedValues with it's key and the values of the it. 
-	 *Later then this will be passed into getCumulativePercentage for these values which are inside the keys, 
-	 *and it expects the percentage will be calculated properly and with accuracy as well this test also covers 
-	 *a test that at different index other than 0 is summing up to 100 or not the percentage overall. 
+	 * This test will create a mock object of the type KeyedValues with it's key and
+	 * the values of the it. Later then this will be passed into
+	 * getCumulativePercentage for these values which are inside the keys, and it
+	 * expects the percentage will be calculated properly and with accuracy as well
+	 * this test also covers a test that at different index other than 0 is summing
+	 * up to 100 or not the percentage overall.
 	 */
 	@Test
 	public void cumulativePercentageForIndexOneHundred() {
 		Mockery mockingContext = new Mockery(); // This here is creating a new mock object called mockingContext.
-		final KeyedValues data = mockingContext.mock(KeyedValues.class); //Using the mock object in the stored value above locally
-		//and creating another local object data which is the type of final and KeyedValues.
+		final KeyedValues data = mockingContext.mock(KeyedValues.class); // Using the mock object in the stored value
+																			// above locally
+		// and creating another local object data which is the type of final and
+		// KeyedValues.
 
-		mockingContext.checking(new Expectations() {//This is the start of the mock expectation block in where we use will to ensure the 
-			//proper values are being returned.
+		mockingContext.checking(new Expectations() {// This is the start of the mock expectation block in where we use
+													// will to ensure the
+			// proper values are being returned.
 			{
-				atLeast(1).of(data).getItemCount(); //Here we call the ItemCount to get the number of values which will be passed in. 
-				will(returnValue(2)); //We pass in the return value of 2 which will be returned whenever getItemCount is called. 
+				atLeast(1).of(data).getItemCount(); // Here we call the ItemCount to get the number of values which will
+													// be passed in.
+				will(returnValue(2)); // We pass in the return value of 2 which will be returned whenever getItemCount
+										// is called.
 
-				atLeast(1).of(data).getValue(0); //This is calling the getValue method of data and that at minimum there is a value at 0.
-				will(returnValue(1.0)); //The return value will always be 1.0 when the getValue(0) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getValue(0); // This is calling the getValue method of data and that at minimum
+													// there is a value at 0.
+				will(returnValue(1.0)); // The return value will always be 1.0 when the getValue(0) is called ensuring
+										// the mock object is built correctly.
 
-				atLeast(1).of(data).getValue(1); //This is calling the getValue method of data and that at minimum there is a value at 1.
-				will(returnValue(5.0)); //The return value will always be 5.0 when the getValue(1) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getValue(1); // This is calling the getValue method of data and that at minimum
+													// there is a value at 1.
+				will(returnValue(5.0)); // The return value will always be 5.0 when the getValue(1) is called ensuring
+										// the mock object is built correctly.
 
-				atLeast(1).of(data).getKey(0);//This is calling the getKey method of data and that at minimum there is a key placed at 0.
-				will(returnValue(19.0)); //The return value will always be 19.0 when the getKey(0) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getKey(0);// This is calling the getKey method of data and that at minimum there is
+												// a key placed at 0.
+				will(returnValue(19.0)); // The return value will always be 19.0 when the getKey(0) is called ensuring
+											// the mock object is built correctly.
 
-				atLeast(1).of(data).getKey(1); //This is calling the getKey method of data and that at minimum there is a key placed at 1.
-				will(returnValue(26.0));  //The return value will always be 26.0 when the getKey(1) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getKey(1); // This is calling the getKey method of data and that at minimum there is
+												// a key placed at 1.
+				will(returnValue(26.0)); // The return value will always be 26.0 when the getKey(1) is called ensuring
+											// the mock object is built correctly.
 
 			}
 		});
 		// First adds 1 + 5 + 19 together all of the values and then it takes the key
-		// at the index of 1 and then does 26/(1+5+19) where 26 is the running total and 6 + 19 is
+		// at the index of 1 and then does 26/(1+5+19) where 26 is the running total and
+		// 6 + 19 is
 		// the total from all of the values
 		// So 26/25 = 1.04 * 100 which is 100 percent(100.04%)
-		KeyedValues result = DataUtilities.getCumulativePercentages(data);//Calls the getCumulativePercentage method to pass in the data 
-		//which is created by the mock objects and is being stored in a local variable result.
-		assertEquals("The value at the index of 0 is 1.0", 1.0, result.getValue(1).doubleValue(), .000000001d);//Asserting that the value is correct at the index of 1 which is 100% of the percentage added up.
+		KeyedValues result = DataUtilities.getCumulativePercentages(data);// Calls the getCumulativePercentage method to
+																			// pass in the data
+		// which is created by the mock objects and is being stored in a local variable
+		// result.
+		assertEquals("The value at the index of 0 is 1.0", 1.0, result.getValue(1).doubleValue(), .000000001d);// Asserting
+																												// that
+																												// the
+																												// value
+																												// is
+																												// correct
+																												// at
+																												// the
+																												// index
+																												// of 1
+																												// which
+																												// is
+																												// 100%
+																												// of
+																												// the
+																												// percentage
+																												// added
+																												// up.
 	}
+
 	/**
-	 *This test will create a local object of the type KeyedValues which will be assigned null and then passing it in the method
-	 * getCumulativePercentages to test wheter an exception is being thrown or not as part of the test creation. 
+	 * This test will create a local object of the type KeyedValues which will be
+	 * assigned null and then passing it in the method getCumulativePercentages to
+	 * test wheter an exception is being thrown or not as part of the test creation.
 	 */
 	@Test
 	public void cumulativePercentageDataNullCheck() {
 		try {
-			final KeyedValues dataToPass = null; //This is creating a local variable of the KeyedValues type and then passing it in as a null. 
+			final KeyedValues dataToPass = null; // This is creating a local variable of the KeyedValues type and then
+													// passing it in as a null.
 			DataUtilities.getCumulativePercentages(dataToPass);
 			// calling getCumulativePercentages() with a null data object
 			fail("This method should throw an exception!");
-			// creating a failure message for if getCumulativePercentages() does not throw an exception
+			// creating a failure message for if getCumulativePercentages() does not throw
+			// an exception
 		} catch (Exception e) {
 			assertEquals("The exception thrown type is IllegalArgumentException", IllegalArgumentException.class,
 					e.getClass());
 			// catching the exception, asserting that an IllegalArgumentException was thrown
 		}
 	}
+
 	/**
-	 *This test will create a mock object of the type KeyedValues with it's key and the values of the it. 
-	 *Later then this will be passed into getCumulativePercentage for these values which are inside the keys, 
-	 *and it expects the percentage will be calculated properly and with accuracy as well this test also covers 
-	 *a test that at one of the index of values it is equal to null and if the percentage method performs the same functionality. 
+	 * This test will create a mock object of the type KeyedValues with it's key and
+	 * the values of the it. Later then this will be passed into
+	 * getCumulativePercentage for these values which are inside the keys, and it
+	 * expects the percentage will be calculated properly and with accuracy as well
+	 * this test also covers a test that at one of the index of values it is equal
+	 * to null and if the percentage method performs the same functionality.
 	 */
 	@Test
 	public void cumulativePercentageForIndexZeroSixteenPercentNullIncluded() {
 		Mockery mockingContext = new Mockery(); // This here is creating a new mock object called mockingContext.
-		final KeyedValues data = mockingContext.mock(KeyedValues.class);//Using the mock object in the stored value above locally
-		//and creating another local object data which is the type of final and KeyedValues.
+		final KeyedValues data = mockingContext.mock(KeyedValues.class);// Using the mock object in the stored value
+																		// above locally
+		// and creating another local object data which is the type of final and
+		// KeyedValues.
 
-		mockingContext.checking(new Expectations() {//This is the start of the mock expectation block in where we use will to ensure the 
-			//proper values are being returned.
+		mockingContext.checking(new Expectations() {// This is the start of the mock expectation block in where we use
+													// will to ensure the
+			// proper values are being returned.
 			{
-				atLeast(1).of(data).getItemCount(); //Here we call the ItemCount to get the number of values which will be passed in. 
-				will(returnValue(3)); //We pass in the return value of 3 which will be returned whenever getItemCount is called. 
+				atLeast(1).of(data).getItemCount(); // Here we call the ItemCount to get the number of values which will
+													// be passed in.
+				will(returnValue(3)); // We pass in the return value of 3 which will be returned whenever getItemCount
+										// is called.
 
-				atLeast(1).of(data).getValue(0); //This is calling the getValue method of data and that at minimum there is a value at 0.
-				will(returnValue(1.0)); //The return value will always be 1.0 when the getValue(0) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getValue(0); // This is calling the getValue method of data and that at minimum
+													// there is a value at 0.
+				will(returnValue(1.0)); // The return value will always be 1.0 when the getValue(0) is called ensuring
+										// the mock object is built correctly.
 
-				atLeast(1).of(data).getValue(1); //This is calling the getValue method of data and that at minimum there is a value at 1.
-				will(returnValue(5.0)); //The return value will always be 5.0 when the getValue(1) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getValue(1); // This is calling the getValue method of data and that at minimum
+													// there is a value at 1.
+				will(returnValue(5.0)); // The return value will always be 5.0 when the getValue(1) is called ensuring
+										// the mock object is built correctly.
 
-				atLeast(1).of(data).getValue(2); //This is calling the getValue method of data and that at minimum there is a value at 2.
-				will(returnValue(null)); //The return value will always be null when the getValue(2) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getValue(2); // This is calling the getValue method of data and that at minimum
+													// there is a value at 2.
+				will(returnValue(null)); // The return value will always be null when the getValue(2) is called ensuring
+											// the mock object is built correctly.
 
-				atLeast(1).of(data).getKey(0); //This is calling the getKey method of data and that at minimum there is a key placed at 0.
-				will(returnValue(25.0)); //The return value will always be 25.0 when the getKey(0) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getKey(0); // This is calling the getKey method of data and that at minimum there is
+												// a key placed at 0.
+				will(returnValue(25.0)); // The return value will always be 25.0 when the getKey(0) is called ensuring
+											// the mock object is built correctly.
 
-				atLeast(1).of(data).getKey(1); //This is calling the getKey method of data and that at minimum there is a key placed at 1.
-				will(returnValue(26.0));  //The return value will always be 26.0 when the getKey(1) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getKey(1); // This is calling the getKey method of data and that at minimum there is
+												// a key placed at 1.
+				will(returnValue(26.0)); // The return value will always be 26.0 when the getKey(1) is called ensuring
+											// the mock object is built correctly.
 
-				atLeast(1).of(data).getKey(2); //This is calling the getKey method of data and that at minimum there is a key placed at 2.
-				will(returnValue(27.0)); //The return value will always be 27.0 when the getKey(2) is called ensuring the mock object is built correctly.
+				atLeast(1).of(data).getKey(2); // This is calling the getKey method of data and that at minimum there is
+												// a key placed at 2.
+				will(returnValue(27.0)); // The return value will always be 27.0 when the getKey(2) is called ensuring
+											// the mock object is built correctly.
 
 			}
 		});
 		// First adds 1 + 5 + null together all of the values and then it takes the key
-		// at the index of 0 and then does 25/6 where 25 is the running total and 6 also including null is
+		// at the index of 0 and then does 25/6 where 25 is the running total and 6 also
+		// including null is
 		// the total from all of the values
 		// So 25/6 = 4.166666667 - 4 = 0.166666667 * 100 which is 16.6 percent(16.6%)
-		KeyedValues result = DataUtilities.getCumulativePercentages(data); //Calls the getCumulativePercentage method to pass in the data 
-		//which is created by the mock objects and is being stored in a local variable result. 
+		KeyedValues result = DataUtilities.getCumulativePercentages(data); // Calls the getCumulativePercentage method
+																			// to pass in the data
+		// which is created by the mock objects and is being stored in a local variable
+		// result.
 		assertEquals("The value at the index of 0 is 0.166666667", 0.166666667, result.getValue(0).doubleValue(),
-				.000000001d);  //Asserting that the value is correct at the index of 0 which is 16.6% of the percentage added up.
+				.000000001d); // Asserting that the value is correct at the index of 0 which is 16.6% of the
+								// percentage added up.
 	}
 
-	// ------------- calculateRowTotal(Values2D data, int row, int[] validCols) Tests -------------
+	// ------------- calculateRowTotal(Values2D data, int row, int[] validCols)
+	// Tests -------------
 	/**
 	 * This test will simulate passing a null object to calculateRowTotal() with a
 	 * row number of 0 and expects that an IllegalArgumentException is thrown.
 	 */
 	@Test
-	public void calculateRowTotalNullChecking() { //This is the three parameter version of what was done in Lab 2 
+	public void calculateRowTotalNullChecking() { // This is the three parameter version of what was done in Lab 2
 		try {
-			final Values2D valueToPass = null; //This is the local variable of the type Values2D which is assigned null 
-			final int rowNumberToPass = 0; //This is the local variable of the type of integer and is rowNumbers which is assigned 0
-			final int[] validColumnsToPass = { 0 }; //This is the local variable of the type of integer which is assigned 0 as there is no valid columns
+			final Values2D valueToPass = null; // This is the local variable of the type Values2D which is assigned null
+			final int rowNumberToPass = 0; // This is the local variable of the type of integer and is rowNumbers which
+											// is assigned 0
+			final int[] validColumnsToPass = { 0 }; // This is the local variable of the type of integer which is
+													// assigned 0 as there is no valid columns
 			DataUtilities.calculateRowTotal(valueToPass, rowNumberToPass, validColumnsToPass);
-			// calling calculateRowTotal() with a null data object the three parameter version is called 
+			// calling calculateRowTotal() with a null data object the three parameter
+			// version is called
 			fail("This method should throw an exception!");
 			// creating a failure message for if calculateRowTotal() does not throw an
 			// exception
@@ -939,14 +1024,16 @@ public class DataUtilitiesTest {
 			// catching the exception, asserting that an IllegalArgumentException was thrown
 		}
 	}
+
 	/**
 	 * This test will simulate passing a null object to calculateRowTotal() with a
-	 * row number of 1 and is expected to calculate the total properly with the valid columns as the new parameter
-	 * in this test which is also 1. Result adds up to 10 (1 + 2 + 3 + 4 = 10) which is correct expected output
-	 * This test also includes null as one of the values in the row. 
+	 * row number of 1 and is expected to calculate the total properly with the
+	 * valid columns as the new parameter in this test which is also 1. Result adds
+	 * up to 10 (1 + 2 + 3 + 4 = 10) which is correct expected output This test also
+	 * includes null as one of the values in the row.
 	 */
 	@Test
-	public void calculateRowTotalWithNull() { //This is the three parameter version of what was done in Lab 2 
+	public void calculateRowTotalWithNull() { // This is the three parameter version of what was done in Lab 2
 		Mockery mockingContext = new Mockery();
 		// creating a new mock object called mockingContext
 		final Values2D values = mockingContext.mock(Values2D.class);
@@ -982,27 +1069,35 @@ public class DataUtilitiesTest {
 				// will always returns 4 when getValue(1, 3) is called
 			}
 		});
-		int rowNumber = 1; // setting rowNumber to have an integer value of 1 as there was only one row being built in the mock object
-		final int[] validColumnsToPass = { 1 }; //This is the valid columns which in this mock object are just one column 
+		int rowNumber = 1; // setting rowNumber to have an integer value of 1 as there was only one row
+							// being built in the mock object
+		final int[] validColumnsToPass = { 1 }; // This is the valid columns which in this mock object are just one
+												// column
 		double result = DataUtilities.calculateRowTotal(values, rowNumber, validColumnsToPass);
-		// calling calculateRowTotal with Values2D = values and at rowNumber 1 and the columns which are correct in this object only 1. 
+		// calling calculateRowTotal with Values2D = values and at rowNumber 1 and the
+		// columns which are correct in this object only 1.
 		assertEquals("The row total is adding up to 2.0", 2.0, result, .000000001d);
-		// asserting the result adds up to 10 (1 + 2 + 3 + 4 = 10) for the three parameter version 
+		// asserting the result adds up to 10 (1 + 2 + 3 + 4 = 10) for the three
+		// parameter version
 	}
 
-	// ------------- calculateColumnTotal(Values2D data, int column, int[] validRows) Tests -------------
+	// ------------- calculateColumnTotal(Values2D data, int column, int[]
+	// validRows) Tests -------------
 	/**
-	 * This test will simulate passing a null object to calculateColumnTotal() with a
-	 * row number of 0 and expects that an IllegalArgumentException is thrown.
+	 * This test will simulate passing a null object to calculateColumnTotal() with
+	 * a row number of 0 and expects that an IllegalArgumentException is thrown.
 	 */
 	@Test
 	public void calculateColumnTotalNullChecking() {
 		try {
-			final Values2D valueToPass = null; //This is the local variable of the type Values2D which is assigned null 
-			final int columnNumberToPass = 0; //This is the local variable of the type of integer and is columnNumbers which is assigned 0
-			final int[] validRowsToPass = { 0 }; //This is the local variable of the type of integer which is assigned 0 as there is no valid rows
+			final Values2D valueToPass = null; // This is the local variable of the type Values2D which is assigned null
+			final int columnNumberToPass = 0; // This is the local variable of the type of integer and is columnNumbers
+												// which is assigned 0
+			final int[] validRowsToPass = { 0 }; // This is the local variable of the type of integer which is assigned
+													// 0 as there is no valid rows
 			DataUtilities.calculateColumnTotal(valueToPass, columnNumberToPass, validRowsToPass);
-			// calling calculateColumnTotal() with a null data object the three parameter version is called 
+			// calling calculateColumnTotal() with a null data object the three parameter
+			// version is called
 			fail("This method should throw an exception!");
 			// creating a failure message for if calculateColumnTotal() does not throw an
 			// exception
@@ -1012,14 +1107,16 @@ public class DataUtilitiesTest {
 			// catching the exception, asserting that an IllegalArgumentException was thrown
 		}
 	}
+
 	/**
-	 * This test will simulate passing a null object to calculateColumnTotal() with a
-	 * column number of 1 and is expected to calculate the total properly with the valid rows as the new parameter
-	 * in this test which is also 1. Result adds up to 10 (1 + 2 + 3 + 4 = 10) which is correct expected output.
-	 * This test also includes null as one of the values in the column. 
+	 * This test will simulate passing a null object to calculateColumnTotal() with
+	 * a column number of 1 and is expected to calculate the total properly with the
+	 * valid rows as the new parameter in this test which is also 1. Result adds up
+	 * to 10 (1 + 2 + 3 + 4 = 10) which is correct expected output. This test also
+	 * includes null as one of the values in the column.
 	 */
 	@Test
-	public void calculateColumnTotalWithNull() { //This is the three parameter version of what was done in Lab 2 
+	public void calculateColumnTotalWithNull() { // This is the three parameter version of what was done in Lab 2
 		Mockery mockingContext = new Mockery();
 		// creating a new mock object called mockingContext
 		final Values2D values = mockingContext.mock(Values2D.class);
@@ -1055,12 +1152,15 @@ public class DataUtilitiesTest {
 				// will always returns 4 when getValue(1, 3) is called
 			}
 		});
-		int columnNumber = 1; // setting columnNumber to have an integer value of 1 as there was only one column being built in the mock object
-		final int[] validRowsToPass = { 1 }; //This is the valid rows which in this mock object are just one row 
+		int columnNumber = 1; // setting columnNumber to have an integer value of 1 as there was only one
+								// column being built in the mock object
+		final int[] validRowsToPass = { 1 }; // This is the valid rows which in this mock object are just one row
 		double result = DataUtilities.calculateColumnTotal(values, columnNumber, validRowsToPass);
-		// calling calculateColumnTotal with Values2D = values and at columnNumber 1 and the row which are correct in this object only 1. 
+		// calling calculateColumnTotal with Values2D = values and at columnNumber 1 and
+		// the row which are correct in this object only 1.
 		assertEquals("The column total is adding up to 2.0", 2.0, result, .000000001d);
-		// asserting the result adds up to 10 (1 + 2 + 3 + 4 = 10) for the three parameter version 
+		// asserting the result adds up to 10 (1 + 2 + 3 + 4 = 10) for the three
+		// parameter version
 	}
 
 	/* Lauraine codes and Abhay Reviews */
@@ -1228,10 +1328,175 @@ public class DataUtilitiesTest {
 	// -----------------------------------------------------------------------------------------
 	// End of code created by Abhay and Lauraine
 	// -----------------------------------------------------------------------------------------
-	
+
 	// -----------------------------------------------------------------------------------------
 	// The following code was taken from the SENG438 Lab Document
 	// -----------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------
+	// Start of Lab 4
+	// -----------------------------------------------------------------------------------------
+	// --------- calculateColumnTotal(Values2D data, int column) Test ---------
+	/**
+	 * This test will simulate passing a object to calculateColumnTotal() with a
+	 * column number of 1 and valid row value that is smaller than total rows. Since
+	 * row > rowCount, the result should be 0. Killed '2. negated conditional → KILLED' Mutation
+	 */
+	@Test
+	public void calculateColumnTotalRowGreaterRowTotal() { // This is the three parameter version of what was done in
+															// Lab 2
+		Mockery mockingContext = new Mockery();
+		// creating a new mock object called mockingContext
+		final Values2D values = mockingContext.mock(Values2D.class);
+		// mock object (mockingContext) is stored in the local variable 'values'
+		// 'values' is final so it can be referred to from within expectation blocks
+
+		mockingContext.checking(new Expectations() {
+			// a mock expectation block containing expectations of value
+			{
+				one(values).getRowCount();
+				// invocation of getColumnCount() is expected once
+				will(returnValue(1));
+				// will always returns 4 when getColumnCount() is called
+
+				one(values).getValue(1, 0);
+				// invocation of getValue(1, 0) is expected once
+				will(returnValue(1.0));
+				// will always returns 1 when getValue(1, 0) is called
+
+				one(values).getValue(1, 1);
+				// invocation of getValue(1, 1) is expected once
+				will(returnValue(2.0));
+				// will always returns 2 when getValue(1, 1) is called
+
+				one(values).getValue(1, 2);
+				// invocation of getValue(1, 2) is expected once
+				will(returnValue(3.0));
+				// will always returns 3 when getValue(1, 2) is called
+
+				one(values).getValue(1, 3);
+				// invocation of getValue(1, 3) is expected once
+				will(returnValue(4.0));
+				// will always returns 4 when getValue(1, 3) is called
+			}
+		});
+		int columnNumber = 1; // setting columnNumber to have an integer value of 1 as there was only one
+								// column being built in the mock object
+		final int[] validRowsToPass = { 4 }; // This is the valid rows which in this mock object are just one row
+		double result = DataUtilities.calculateColumnTotal(values, columnNumber, validRowsToPass);
+		// calling calculateColumnTotal with Values2D = values and at columnNumber 1 and
+		// the row which are correct in this object only 1.
+		assertEquals("The column total is adding up to 0.0", 0.0, result, .000000001d);
+		// asserting the result adds up to 10 (1 + 2 + 3 + 4 = 10) for the three
+		// parameter version
+	}
+	
+	/**
+	 * This test will simulate passing a object to calculateColumnTotal() with a
+	 * column number of 1 and valid row value that is smaller than total rows. Since
+	 * row = rowCount, the result should be 0. Expected to kill mutation '1. changed conditional boundary'
+	 */
+	@Test
+	public void calculateColumnTotalRowEqualRowTotal() { // This is the three parameter version of what was done in
+															// Lab 2
+		Mockery mockingContext = new Mockery();
+		// creating a new mock object called mockingContext
+		final Values2D values = mockingContext.mock(Values2D.class);
+		// mock object (mockingContext) is stored in the local variable 'values'
+		// 'values' is final so it can be referred to from within expectation blocks
+
+		mockingContext.checking(new Expectations() {
+			// a mock expectation block containing expectations of value
+			{
+				one(values).getRowCount();
+				// invocation of getColumnCount() is expected once
+				will(returnValue(1));
+				// will always returns 4 when getColumnCount() is called
+
+				one(values).getValue(1, 0);
+				// invocation of getValue(1, 0) is expected once
+				will(returnValue(1.0));
+				// will always returns 1 when getValue(1, 0) is called
+
+				one(values).getValue(1, 1);
+				// invocation of getValue(1, 1) is expected once
+				will(returnValue(2.0));
+				// will always returns 2 when getValue(1, 1) is called
+
+				one(values).getValue(1, 2);
+				// invocation of getValue(1, 2) is expected once
+				will(returnValue(3.0));
+				// will always returns 3 when getValue(1, 2) is called
+			}
+		});
+		int columnNumber = 1; // setting columnNumber to have an integer value of 1 as there was only one
+								// column being built in the mock object
+		final int[] validRowsToPass = { 1 }; // This is the valid rows which in this mock object are just one row
+		double result = DataUtilities.calculateColumnTotal(values, columnNumber, validRowsToPass);
+		// calling calculateColumnTotal with Values2D = values and at columnNumber 1 and
+		// the row which are correct in this object only 1.
+		assertEquals("The column total is adding up to 0.0", 0.0, result, .000000001d);
+		// asserting the result adds up to 10 (1 + 2 + 3 + 4 = 10) for the three
+		// parameter version
+	}
+	
+	/**
+	 * This test will simulate passing a object to calculateColumnTotal() with a
+	 * column number of 1 and valid row value that is smaller than total rows. Since
+	 * row = rowCount, the result should be 0. Expected to kill mutation '3. removed conditional - replaced equality check with true'
+	 */
+	@Test
+	public void calculateColumnTotalNEqualNull() { // This is the three parameter version of what was done in
+															// Lab 2
+		Mockery mockingContext = new Mockery();
+		// creating a new mock object called mockingContext
+		final Values2D values = mockingContext.mock(Values2D.class);
+		// mock object (mockingContext) is stored in the local variable 'values'
+		// 'values' is final so it can be referred to from within expectation blocks
+
+		mockingContext.checking(new Expectations() {
+			// a mock expectation block containing expectations of value
+			{
+				one(values).getRowCount();
+				// invocation of getColumnCount() is expected once
+				will(returnValue(4));
+				// will always returns 4 when getColumnCount() is called
+
+				one(values).getValue(0, 0);
+				// invocation of getValue(1, 0) is expected once
+				will(returnValue(1.0));
+				// will always returns 1 when getValue(1, 0) is called
+
+				one(values).getValue(1, 0);
+				// invocation of getValue(1, 1) is expected once
+				will(returnValue(2.0));
+				// will always returns 2 when getValue(1, 1) is called
+
+				one(values).getValue(2, 0);
+				// invocation of getValue(1, 2) is expected once
+				will(returnValue(3.0));
+				// will always returns 3 when getValue(1, 2) is called
+
+				one(values).getValue(3, 0);
+				// invocation of getValue(1, 3) is expected once
+				will(returnValue(null));
+				// will always returns 4 when getValue(1, 3) is called
+			}
+		});
+		int columnNumber = 0; // setting columnNumber to have an integer value of 1 as there was only one
+								// column being built in the mock object
+		final int[] validRowsToPass = {0, 1, 2, 3}; // This is the valid rows which in this mock object are just one row
+		double result = DataUtilities.calculateColumnTotal(values, columnNumber, validRowsToPass);
+		// calling calculateColumnTotal with Values2D = values and at columnNumber 1 and
+		// the row which are correct in this object only 1.
+		assertEquals("The column total is adding up to 6.0", 6.0, result, .000000001d);
+		// asserting the result adds up to 10 (1 + 2 + 3 = 6) for the three
+		// parameter version
+	}
+
+	// -----------------------------------------------------------------------------------------
+	// End of Lab 4
+	// -----------------------------------------------------------------------------------------
+
 	@After
 	public void tearDown() throws Exception {
 		// Tear down function for after running the tests it does nothing.
