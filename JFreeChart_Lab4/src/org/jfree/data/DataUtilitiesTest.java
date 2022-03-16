@@ -1048,7 +1048,7 @@ public class DataUtilitiesTest {
 				will(returnValue(4));
 				// will always returns 4 when getColumnCount() is called
 
-				one(values).getValue(0, 1);
+				one(values).getValue(1, 0);
 				// invocation of getValue(1, 0) is expected once
 				will(returnValue(1.0));
 				// will always returns 1 when getValue(1, 0) is called
@@ -1058,25 +1058,25 @@ public class DataUtilitiesTest {
 				will(returnValue(2.0));
 				// will always returns 2 when getValue(1, 1) is called
 
-				one(values).getValue(2, 1);
+				one(values).getValue(1, 2);
 				// invocation of getValue(1, 2) is expected once
 				will(returnValue(3.0));
 				// will always returns 3 when getValue(1, 2) is called
 
-				one(values).getValue(3, 1);
+				one(values).getValue(1, 3);
 				// invocation of getValue(1, 3) is expected once
-				will(returnValue(4.0));
+				will(returnValue(null));
 				// will always returns 4 when getValue(1, 3) is called
 			}
 		});
 		int rowNumber = 1; // setting rowNumber to have an integer value of 1 as there was only one row
 							// being built in the mock object
-		final int[] validColumnsToPass = { 1 }; // This is the valid columns which in this mock object are just one
+		final int[] validColumnsToPass = { 0, 1, 2, 3 }; // This is the valid columns which in this mock object are just one
 												// column
 		double result = DataUtilities.calculateRowTotal(values, rowNumber, validColumnsToPass);
 		// calling calculateRowTotal with Values2D = values and at rowNumber 1 and the
 		// columns which are correct in this object only 1.
-		assertEquals("The row total is adding up to 2.0", 2.0, result, .000000001d);
+		assertEquals("The row total is adding up to 6.0", 6.0, result, .000000001d);
 		// asserting the result adds up to 10 (1 + 2 + 3 + 4 = 10) for the three
 		// parameter version
 	}
@@ -1339,7 +1339,8 @@ public class DataUtilitiesTest {
 	/**
 	 * This test will simulate passing a object to calculateColumnTotal() with a
 	 * column number of 1 and valid row value that is smaller than total rows. Since
-	 * row > rowCount, the result should be 0. Killed '2. negated conditional → KILLED' Mutation
+	 * row > rowCount, the result should be 0. Killed '2. negated conditional →
+	 * KILLED' Mutation
 	 */
 	@Test
 	public void calculateColumnTotalRowGreaterRowTotal() { // This is the three parameter version of what was done in
@@ -1389,11 +1390,12 @@ public class DataUtilitiesTest {
 		// asserting the result adds up to 10 (1 + 2 + 3 + 4 = 10) for the three
 		// parameter version
 	}
-	
+
 	/**
 	 * This test will simulate passing a object to calculateColumnTotal() with a
 	 * column number of 1 and valid row value that is smaller than total rows. Since
-	 * row = rowCount, the result should be 0. Expected to kill mutation '1. changed conditional boundary'
+	 * row = rowCount, the result should be 0. Expected to kill mutation '1. changed
+	 * conditional boundary'
 	 */
 	@Test
 	public void calculateColumnTotalRowEqualRowTotal() { // This is the three parameter version of what was done in
@@ -1438,15 +1440,16 @@ public class DataUtilitiesTest {
 		// asserting the result adds up to 10 (1 + 2 + 3 + 4 = 10) for the three
 		// parameter version
 	}
-	
+
 	/**
 	 * This test will simulate passing a object to calculateColumnTotal() with a
-	 * column number of 1 and valid row value that is smaller than total rows. Since
-	 * row = rowCount, the result should be 0. Expected to kill mutation '3. removed conditional - replaced equality check with true'
+	 * column number of 0 and 4 valid rows where one row has a value n = null.
+	 * Expected to kill mutation '3. removed conditional - replaced equality check
+	 * with true'
 	 */
 	@Test
 	public void calculateColumnTotalNEqualNull() { // This is the three parameter version of what was done in
-															// Lab 2
+													// Lab 2
 		Mockery mockingContext = new Mockery();
 		// creating a new mock object called mockingContext
 		final Values2D values = mockingContext.mock(Values2D.class);
@@ -1484,7 +1487,8 @@ public class DataUtilitiesTest {
 		});
 		int columnNumber = 0; // setting columnNumber to have an integer value of 1 as there was only one
 								// column being built in the mock object
-		final int[] validRowsToPass = {0, 1, 2, 3}; // This is the valid rows which in this mock object are just one row
+		final int[] validRowsToPass = { 0, 1, 2, 3 }; // This is the valid rows which in this mock object are just one
+														// row
 		double result = DataUtilities.calculateColumnTotal(values, columnNumber, validRowsToPass);
 		// calling calculateColumnTotal with Values2D = values and at columnNumber 1 and
 		// the row which are correct in this object only 1.
@@ -1492,7 +1496,80 @@ public class DataUtilitiesTest {
 		// asserting the result adds up to 10 (1 + 2 + 3 = 6) for the three
 		// parameter version
 	}
+	
+	// ------------- calculateRowTotal(Values2D data, int row, int[] validCols)
+	// Tests -------------
+	/**
+	 * Expected to kill mutation '2. negated conditional'
+	 */
+	@Test
+	public void calculateRowTotalConditionalBoundary() { // This is the three parameter version of what was done in Lab 2
+		Mockery mockingContext = new Mockery();
+		// creating a new mock object called mockingContext
+		final Values2D values = mockingContext.mock(Values2D.class);
+		// mock object (mockingContext) is stored in the local variable 'values'
+		// 'values' is final so it can be referred to from within expectation blocks
 
+		mockingContext.checking(new Expectations() {
+			// a mock expectation block containing expectations of value
+			{
+				one(values).getColumnCount();
+				// invocation of getColumnCount() is expected once
+				will(returnValue(1));
+				// will always returns 4 when getColumnCount() is called
+
+				one(values).getValue(1, 0);
+				// invocation of getValue(1, 0) is expected once
+				will(returnValue(1.0));
+				// will always returns 1 when getValue(1, 0) is called
+			}
+		});
+		int rowNumber = 1; // setting rowNumber to have an integer value of 1 as there was only one row
+							// being built in the mock object
+		final int[] validColumnsToPass = {2}; // This is the valid columns which in this mock object are just one
+												// column
+		double result = DataUtilities.calculateRowTotal(values, rowNumber, validColumnsToPass);
+		// calling calculateRowTotal with Values2D = values and at rowNumber 1 and the
+		// columns which are correct in this object only 1.
+		assertEquals("The row total is adding up to 0.0", 0.0, result, .000000001d);
+		// asserting the result adds up to 10 (1 + 2 + 3 + 4 = 10) for the three
+		// parameter version
+	}
+	
+	/**
+	 * Expected to kill mutation '1. changed conditional boundary'
+	 */
+	@Test
+	public void calculateRowTotalChangedConditional() { // This is the three parameter version of what was done in Lab 2
+		Mockery mockingContext = new Mockery();
+		// creating a new mock object called mockingContext
+		final Values2D values = mockingContext.mock(Values2D.class);
+		// mock object (mockingContext) is stored in the local variable 'values'
+		// 'values' is final so it can be referred to from within expectation blocks
+
+		mockingContext.checking(new Expectations() {
+			// a mock expectation block containing expectations of value
+			{
+				one(values).getColumnCount();
+				// invocation of getColumnCount() is expected once
+				will(returnValue(1));
+				// will always returns 4 when getColumnCount() is called
+
+				one(values).getValue(1, 0);
+				// invocation of getValue(1, 0) is expected once
+				will(returnValue(1.0));
+				// will always returns 1 when getValue(1, 0) is called
+			}
+		});
+		int rowNumber = 1; // setting rowNumber to have an integer value of 1 as there was only one row
+							// being built in the mock object
+		final int[] validColumnsToPass = {1}; // This is the valid columns which in this mock object are just one
+												// column
+		double result = DataUtilities.calculateRowTotal(values, rowNumber, validColumnsToPass);
+		// calling calculateRowTotal with Values2D = values and at rowNumber 1 and the
+		// columns which are correct in this object only 1.
+		assertEquals("The row total is adding up to 0.0", 0.0, result, .000000001d);
+	}
 	// -----------------------------------------------------------------------------------------
 	// End of Lab 4
 	// -----------------------------------------------------------------------------------------
