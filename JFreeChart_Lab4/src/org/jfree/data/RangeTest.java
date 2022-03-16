@@ -1022,7 +1022,6 @@ public class RangeTest {
 		Range testShiftedRange = Range.shift(testRange1, 158, false);
 		assertEquals("The shifted value should be ", 164, testShiftedRange.getUpperBound(), .000000001d);
 	}
-	
 
 	/**
 	 * This test will be used to test what happens when a range is shifted by a
@@ -1049,7 +1048,6 @@ public class RangeTest {
 		assertEquals("The value for the lower bound is incorrect.", -0.2, testShiftedRange.getLowerBound(),
 				.000000001d);
 	}
-
 
 	// -------- scale(Range base, double factor) Tests ----------
 	/**
@@ -1085,6 +1083,158 @@ public class RangeTest {
 
 	// -----------------------------------------------------------------------------------------
 	// End of code by Alexis and Rachel
+	// -----------------------------------------------------------------------------------------
+
+	// -----------------------------------------------------------------------------------------
+	// Start of Lab 4
+	// -----------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------
+	// Start of Lauraine and Alexis Mutation Code
+	// -----------------------------------------------------------------------------------------
+
+	// ------------- tests for getCentralValue() --------------------
+	@Test
+	public void getCentralValuePositive() {
+		testRange1 = new Range(4, 8);
+		assertEquals("The central value is wrong.", 6, testRange1.getCentralValue(), .000000001d);
+	}
+
+	// ---------------- tests for contains(double value) ----------------
+	@Test
+	public void containsValueOnLowerBound() {
+		testRange1 = new Range(2, 6); // This is creating the range for testing purposes.
+		boolean testBool = testRange1.contains(2); // Seeing if range (2, 6) contains the value 2
+		assertTrue("The expected output should be true", testBool);
+		// assertion that expected value matches the actual value (true)
+	}
+
+	@Test
+	public void containsValueOnUpperBound() {
+		testRange1 = new Range(2, 6); // This is creating the range for testing purposes.
+		boolean testBool = testRange1.contains(6); // Seeing if range (2, 6) contains the value 6
+		assertTrue("The expected output should be true", testBool);
+		// assertion that expected value matches the actual value (true)
+	}
+
+	// ------------- tests for intersects(double b0, double b1) -------------
+	@Test
+	public void intersectsLowerBoundRangeEqualsUpperBound() {
+		testRange1 = new Range(2, 6); // This is creating the range for testing purposes.
+		double lowerBound = 1;
+		double upperBound = 2;
+		boolean testBool = testRange1.intersects(lowerBound, upperBound); // Seeing if range (2, 6) intersects with (1,
+																			// 2)
+		assertFalse("The expected output should be false", testBool);
+		// assertion that expected value matches the actual value (false)
+	}
+
+	@Test
+	public void intersectsUpperBoundRangeEqualsLowerBound() {
+		testRange1 = new Range(2, 6); // This is creating the range for testing purposes.
+		double lowerBound = 6;
+		double upperBound = 7;
+		boolean testBool = testRange1.intersects(lowerBound, upperBound); // Seeing if range (2, 6) intersects with (6,
+																			// 7)
+		assertFalse("The expected output should be false", testBool);
+		// assertion that expected value matches the actual value (false)
+	}
+
+	// ------- tests for intersects(Range range) ------------
+	@Test
+	public void intersectsRangeIsFalse() {
+		testRange1 = new Range(2, 6); // This is creating the range for testing purposes.
+		double lowerBound = 7;
+		double upperBound = 9;
+		Range testRange2 = new Range(lowerBound, upperBound);
+		boolean testBool = testRange1.intersects(testRange2); // Seeing if range (2, 6) intersects with (7, 9)
+		assertFalse("The expected output should be false", testBool);
+		// assertion that expected value matches the actual value (true)
+	}
+
+	// ------- tests for double min(double d1, double d2) ------------
+	@Test
+	public void minTest_combineIgnoringNaN_returnsLowerBound() {
+		double NaNParam1 = Math.sqrt(-1); // creating a not-a-number to be used as parameters
+		double NaNParam2 = Math.sqrt(-2);
+		testRange1 = new Range(1, 4); // This is creating the range for testing purposes.
+		Range returnRange;
+		returnRange = Range.combineIgnoringNaN(testRange1, new Range(NaNParam1, NaNParam2)); // will make a call to both
+																								// min and max with d2
+																								// as a NaN value
+		assertEquals("The return value should be 1", returnRange.getLowerBound(), 1, .000000001d);
+		// assertion that expected value matches the actual value of 4
+	}
+
+	// ------- tests for double scale(Range base, double factor) ------------
+	@Test
+	public void scalePositiveRangeZeroFactor() {
+		testRange1 = new Range(2, 6);
+		Range testScale = Range.scale(testRange1, 0);
+		assertEquals("The shifted value should be ", 0, testScale.getLowerBound(), .000000001d);
+	}
+
+	@Test
+	public void scalePositiveRangePositiveFactorLowerBound() {
+		testRange1 = new Range(2, 6);
+		Range testScale = Range.scale(testRange1, 2);
+		assertEquals("The shifted value should be ", 4, testScale.getLowerBound(), .000000001d);
+	}
+
+	// -- tests for double shiftWithNoZeroCrossing(double value, double delta) ---
+	@Test
+	public void shiftWithNoZeroCrossingWhereValueEqualsZero() {
+		testRange1 = new Range(0, 0);
+		Range testShiftedRange = Range.shift(testRange1, 158, false);
+		assertEquals("The shifted value should be ", 158, testShiftedRange.getUpperBound(), .000000001d);
+	}
+
+	@Test
+	public void shiftWithNoZeroCrossingWhereValueIsNegative() {
+		testRange1 = new Range(-2, -1);
+		Range testShiftedRange = Range.shift(testRange1, -158, false);
+		assertEquals("The shifted value should be ", -159, testShiftedRange.getUpperBound(), .000000001d);
+	}
+
+	// ----------- tests for equals(Object obj) ----------------
+	@Test
+	public void equalsParameterIsNotARangeObjec() {
+		testRange1 = new Range(2, 6);
+		boolean testEqualRanges = testRange1.equals(null);
+		assertFalse("These Range objects are equal.", testEqualRanges);
+	}
+
+	@Test
+	public void equalsDifferentLowerBound() {
+		testRange1 = new Range(2, 6);
+		boolean testEqualRanges = testRange1.equals(new Range(3, 6));
+		assertFalse("These Range objects are equal.", testEqualRanges);
+	}
+
+	@Test
+	public void equalsDifferentUpperBound() {
+		testRange1 = new Range(2, 6);
+		boolean testEqualRanges = testRange1.equals(new Range(2, 5));
+		assertFalse("These Range objects are equal.", testEqualRanges);
+	}
+
+	// ----------- tests for hashCode() ----------------
+	@Test
+	public void hashCodeTest() {
+		testRange1 = new Range(2, 6);
+		int testHashCodeResult = testRange1.hashCode();
+		assertEquals("This hashcode is incorrect.", -2145910784, testHashCodeResult);
+	}
+
+	// ------- tests for double toString() ------------
+	@Test
+	public void toStringTest() {
+		testRange1 = new Range(2, 6); // This is creating the range for testing purposes.
+		String message = testRange1.toString();
+		assertEquals("The string is wrong.", message, "Range[2.0,6.0]");
+	}
+
+	// -----------------------------------------------------------------------------------------
+	// End of Lauraine and Alexis Mutation Code
 	// -----------------------------------------------------------------------------------------
 
 	// -----------------------------------------------------------------------------------------
