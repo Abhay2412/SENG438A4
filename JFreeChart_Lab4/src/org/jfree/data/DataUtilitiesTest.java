@@ -1499,42 +1499,6 @@ public class DataUtilitiesTest {
 	
 	// ------------- calculateRowTotal(Values2D data, int row, int[] validCols)
 	// Tests -------------
-	/**
-	 * Expected to kill mutation '2. negated conditional'
-	 */
-	@Test
-	public void calculateRowTotalConditionalBoundary() { // This is the three parameter version of what was done in Lab 2
-		Mockery mockingContext = new Mockery();
-		// creating a new mock object called mockingContext
-		final Values2D values = mockingContext.mock(Values2D.class);
-		// mock object (mockingContext) is stored in the local variable 'values'
-		// 'values' is final so it can be referred to from within expectation blocks
-
-		mockingContext.checking(new Expectations() {
-			// a mock expectation block containing expectations of value
-			{
-				one(values).getColumnCount();
-				// invocation of getColumnCount() is expected once
-				will(returnValue(1));
-				// will always returns 4 when getColumnCount() is called
-
-				one(values).getValue(1, 0);
-				// invocation of getValue(1, 0) is expected once
-				will(returnValue(1.0));
-				// will always returns 1 when getValue(1, 0) is called
-			}
-		});
-		int rowNumber = 1; // setting rowNumber to have an integer value of 1 as there was only one row
-							// being built in the mock object
-		final int[] validColumnsToPass = {2}; // This is the valid columns which in this mock object are just one
-												// column
-		double result = DataUtilities.calculateRowTotal(values, rowNumber, validColumnsToPass);
-		// calling calculateRowTotal with Values2D = values and at rowNumber 1 and the
-		// columns which are correct in this object only 1.
-		assertEquals("The row total is adding up to 0.0", 0.0, result, .000000001d);
-		// asserting the result adds up to 10 (1 + 2 + 3 + 4 = 10) for the three
-		// parameter version
-	}
 	
 	/**
 	 * Expected to kill mutation '1. changed conditional boundary'
