@@ -11,7 +11,7 @@
 
 # Introduction
 Mutation testing and using the Selenium tool was the main focus of this lab assignment as to familiarize ourselves with these concepts first seen in the lectures, for the mutation testing our group decided to use the PIT testing tool to see the mutation coverage in Eclipse. In Part 2 of the lab, we used the Selenium IDE extension on our respective browsers. Additionally, mutation testing was introduced to ensure that the original source code has a high error detection, with the test cases written to catch weak spots of the code which were not tested properly. GUI testing was another focal point in this lab assignment, is a bit of an insight to automating the test cases and primarily on the foundation of a user interface which the user can record/run their scripts. 
- 
+
 # Analysis of 10 Mutants of the Range class 
 ### Range
 #### 1. toString()
@@ -44,10 +44,10 @@ Mutation testing and using the Selenium tool was the main focus of this lab assi
 #### 10. scale(Range base, double factor)
 **Mutation: Negated double local variable number 1 → KILLED** 
 **Analysis:** This mutation replaced the “factor” argument with a value of 1 instead. In our test case scalePositiveRangePositiveFactor, a factor of 2 is sent in as an argument with the range (0,6). When the factor of 1 is used in the computation, an incorrect value is returned and the test case fails, killing the mutation.
- 
+
 # Report all the statistics and the mutation score for each test class
 ## Original Test Scores
-### Range Original Mutation Score (73%)
+### Range Original Mutation Score (62%)
 ![](./Screenshots/RangeOriginal.png)
  
 ### DataUtilities Original Mutation Score (96%)
