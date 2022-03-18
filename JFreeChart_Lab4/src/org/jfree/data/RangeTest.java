@@ -1239,9 +1239,8 @@ public class RangeTest {
 		double NaNParam2 = Math.sqrt(-2);
 		testRange1 = new Range(1, 4); // This is creating the range for testing purposes.
 		Range returnRange;
-		returnRange = Range.combineIgnoringNaN(testRange1, new Range(NaNParam1, NaNParam2)); // will make a call to both
-																								// min and max with d2
-																								// as a NaN value
+		returnRange = Range.combineIgnoringNaN(testRange1, new Range(NaNParam1, NaNParam2)); 
+		// will make a call to both min and max with d2 as a NaN value
 		assertEquals("The return value should be 1", returnRange.getLowerBound(), 1, .000000001d);
 		// assertion that expected value matches the actual value of 4
 	}
