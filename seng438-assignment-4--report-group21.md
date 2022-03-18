@@ -2,7 +2,7 @@
 
 **Lab. Report \#4 – Mutation Testing and Web app testing**
 
-| Group \#:       |   |
+| Group #21:       |   |
 |-----------------|---|
 | Student Names:  | Lauraine Baffot  |
 |                 | Alexis Hamrak  |
