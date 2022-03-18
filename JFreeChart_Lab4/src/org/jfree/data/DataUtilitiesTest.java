@@ -1533,67 +1533,6 @@ public class DataUtilitiesTest {
 		// asserting the result adds up to 0 since there is an equal amount valid rows and of row count which the method does not account for. This is for the three
 		// parameter version method
 	}
-//	
-//	/**
-//	 * This test will check the equals() function to see if two equal (and same
-//	 * length) double 2D arrays can be passed in as arguments and are found to be
-//	 * equal.
-//	 */
-//	@Test
-//	public void testEqualityOfEqualArraysEqual() {
-//		double[][] array1 = { {1}, {1}};
-//		double[][] equalArray = array1;
-//
-//		boolean equality = DataUtilities.equal(array1, equalArray);
-//
-//		assertEquals("The equality should be true", true, equality);
-//	}
-//	
-//	/**
-//	 * This test will check the equals() function to see if two equal (and same
-//	 * length) double 2D arrays can be passed in as arguments and are found to be
-//	 * equal.
-//	 */
-//	@Test
-//	public void testEqualityOfEqualArraysDifLength() {
-//		double[][] array1 = { {1}, {1}};
-//		double[][] equalArray = { };
-//
-//		boolean equality = DataUtilities.equal(array1, equalArray);
-//
-//		assertEquals("The equality should be false", false, equality);
-//	}
-//	
-//	/**
-//	 * This test will check the equals() function to see if two equal (and same
-//	 * length) double 2D arrays can be passed in as arguments and are found to be
-//	 * equal.
-//	 */
-//	@Test
-//	public void testEqualityOfEqualArraysDifLengthBGreater() {
-//		double[][] array1 = { };
-//		double[][] equalArray = { {1}, {1}};
-//
-//		boolean equality = DataUtilities.equal(array1, equalArray);
-//
-//		assertEquals("The equality should be false", false, equality);
-//	}
-//	
-//	
-//	/**
-//	 * This test will check the equals() function to see if two equal (and same
-//	 * length) double 2D arrays can be passed in as arguments and are found to be
-//	 * equal.
-//	 */
-//	@Test
-//	public void testEqualityOfEqualArraysEmpty() {
-//		double[][] array1 = {};
-//		double[][] equalArray = { };
-//
-//		boolean equality = DataUtilities.equal(array1, equalArray);
-//
-//		assertEquals("The equality should be true", true, equality);
-//	}
 	// -----------------------------------------------------------------------------------------
 	// END OF CODE CREATED BY ABHAY AND RACHEL
 	// -----------------------------------------------------------------------------------------
