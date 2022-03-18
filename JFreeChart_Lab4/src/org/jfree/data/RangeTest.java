@@ -1093,6 +1093,10 @@ public class RangeTest {
 	// -----------------------------------------------------------------------------------------
 
 	// ------------- tests for getCentralValue() --------------------
+	/**
+	 * This test will be testing the getCentralValue function. We will be testing to see if the range's central value
+	 * matches the predicted one.
+	 */
 	@Test
 	public void getCentralValuePositive() {
 		testRange1 = new Range(4, 8);
@@ -1100,6 +1104,10 @@ public class RangeTest {
 	}
 
 	// ---------------- tests for contains(double value) ----------------
+	/**
+	 * This test will be testing the contains function. We will be testing to see if the range includes a value on the 
+	 * lower boundary.
+	 */
 	@Test
 	public void containsValueOnLowerBound() {
 		testRange1 = new Range(2, 6); // This is creating the range for testing purposes.
@@ -1107,7 +1115,10 @@ public class RangeTest {
 		assertTrue("The expected output should be true", testBool);
 		// assertion that expected value matches the actual value (true)
 	}
-
+	/**
+	 * This test will be testing the contains function. We will be testing to see if the range includes a value on the 
+	 * upper boundary.
+	 */
 	@Test
 	public void containsValueOnUpperBound() {
 		testRange1 = new Range(2, 6); // This is creating the range for testing purposes.
@@ -1116,14 +1127,15 @@ public class RangeTest {
 		// assertion that expected value matches the actual value (true)
 	}
 	/**
-	 * This test will be testing the intersects function. We will be testing to see if the decremented mutant will
-	 * create a failure in the test case.
+	 * This test will be testing the contains function. We will be testing to see if the range includes a value on the 
+	 * lower boundary.
 	 */
 	@Test
     	public void containsDecrement() {
         	testRange1 = new Range(5, 6);
-        	boolean returned = testRange1.contains(5);
+        	boolean returned = testRange1.contains(5); // Seeing if range (5, 6) contains the value 5
         	assertTrue("The range was false when it should be true", returned);
+		// assertion that expected value matches the actual value (true)
     	}
 
 	// ------------- tests for intersects(double b0, double b1) -------------
