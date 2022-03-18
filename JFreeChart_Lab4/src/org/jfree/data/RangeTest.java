@@ -1115,8 +1115,22 @@ public class RangeTest {
 		assertTrue("The expected output should be true", testBool);
 		// assertion that expected value matches the actual value (true)
 	}
+	/**
+	 * This test will be testing the intersects function. We will be testing to see if the decremented mutant will
+	 * create a failure in the test case.
+	 */
+	@Test
+    	public void containsDecrement() {
+        	testRange1 = new Range(5, 6);
+        	boolean returned = testRange1.contains(5);
+        	assertTrue("The range was false when it should be true", returned);
+    	}
 
 	// ------------- tests for intersects(double b0, double b1) -------------
+	/**
+	 * This test will be testing the intersects function. We will be testing to see if the range intersects with two given points,
+	 * and in this case it should not.
+	 */
 	@Test
 	public void intersectsLowerBoundRangeEqualsUpperBound() {
 		testRange1 = new Range(2, 6); // This is creating the range for testing purposes.
@@ -1127,7 +1141,10 @@ public class RangeTest {
 		assertFalse("The expected output should be false", testBool);
 		// assertion that expected value matches the actual value (false)
 	}
-
+	/**
+	 * This test will be testing the intersects function. We will be testing to see if the range intersects with two given points,
+	 * and in this case it should not.
+	 */
 	@Test
 	public void intersectsUpperBoundRangeEqualsLowerBound() {
 		testRange1 = new Range(2, 6); // This is creating the range for testing purposes.
@@ -1138,8 +1155,44 @@ public class RangeTest {
 		assertFalse("The expected output should be false", testBool);
 		// assertion that expected value matches the actual value (false)
 	}
+	/**
+	 * This test will be testing the intersects function. We will be testing to see if the lower boundary condition is 
+	 * found to intersect with the given range of (2,3)
+	 */
+	@Test
+    	public void intersectsBoundary() {
+        	//boundary line 157
+        	testRange1 = new Range(2, 3);
+        	boolean returned = testRange1.intersects(2, 2);
+        	assertFalse("The range was true when it should be false", returned);
+    	}
+	/**
+	 * This test will be testing the intersects function. We will be testing to see if an increment mutation
+	 * will change the output.
+	 */
+    	@Test
+    	public void intersectsIncrement() {
+        	//increment line 158 (++a should be false)
+        	testRange1 = new Range(2, 3);
+        	boolean returned = testRange1.intersects(2, 2);
+        	assertFalse("The range was true when it should be false", returned);
+    	}
+	/**
+	 * This test will be testing the intersects function. We will be testing to see if a decrement mutation
+	 * will change the output.
+	 */
+    	@Test
+    	public void intersectsDecrement() {
+        	testRange1 = new Range(2, 3);
+        	boolean returned = testRange1.intersects(2, 3);
+        	assertTrue("The range was false when it should be true", returned);
+    	}
 
 	// ------- tests for intersects(Range range) ------------
+	/**
+	 * This test will be testing the intersects function. We will be testing to see if the range intersects with 
+	 * a range that is higher. This case will return false.
+	 */
 	@Test
 	public void intersectsRangeIsFalse() {
 		testRange1 = new Range(2, 6); // This is creating the range for testing purposes.
@@ -1152,6 +1205,10 @@ public class RangeTest {
 	}
 
 	// ------- tests for double min(double d1, double d2) ------------
+	/**
+	 * This test will be testing the min function. We will be testing to see if the min function performs as it should
+	 * with the mutations. 
+	 */
 	@Test
 	public void minTest_combineIgnoringNaN_returnsLowerBound() {
 		double NaNParam1 = Math.sqrt(-1); // creating a not-a-number to be used as parameters
@@ -1166,72 +1223,130 @@ public class RangeTest {
 	}
 
 	// ------- tests for double scale(Range base, double factor) ------------
+	/**
+	 * This test will be testing the scale function. We will be testing to see if the upper bound of the 
+	 * range matches the correct location after it is scaled. 
+	 */
 	@Test
 	public void scalePositiveRangeZeroFactor() {
 		testRange1 = new Range(2, 6);
 		Range testScale = Range.scale(testRange1, 0);
 		assertEquals("The shifted value should be ", 0, testScale.getLowerBound(), .000000001d);
+		// assertion that expected value matches the actual value of 0
 	}
 
+	/**
+	 * This test will be testing the scale function. We will be testing to see if the upper bound of the 
+	 * range matches the correct location after it is scaled. 
+	 */
 	@Test
 	public void scalePositiveRangePositiveFactorLowerBound() {
 		testRange1 = new Range(2, 6);
 		Range testScale = Range.scale(testRange1, 2);
 		assertEquals("The shifted value should be ", 4, testScale.getLowerBound(), .000000001d);
+		// assertion that expected value matches the actual value of 4
 	}
 
 	// -- tests for double shiftWithNoZeroCrossing(double value, double delta) ---
+	/**
+	 * This test will be testing the shift function. We will be testing to see if the upper bound of the 
+	 * range matches the correct location after it is shifted. The range values will both be 0 for this test. 
+	 */
 	@Test
 	public void shiftWithNoZeroCrossingWhereValueEqualsZero() {
 		testRange1 = new Range(0, 0);
 		Range testShiftedRange = Range.shift(testRange1, 158, false);
 		assertEquals("The shifted value should be ", 158, testShiftedRange.getUpperBound(), .000000001d);
+		// assertion that expected value matches the actual value of 158
 	}
 
+	/**
+	 * This test will be testing the shift function. We will be testing to see if the upper bound of the 
+	 * range matches the correct location after it is shifted. The range values will be negative for this test
+	 */
 	@Test
 	public void shiftWithNoZeroCrossingWhereValueIsNegative() {
 		testRange1 = new Range(-2, -1);
 		Range testShiftedRange = Range.shift(testRange1, -158, false);
 		assertEquals("The shifted value should be ", -159, testShiftedRange.getUpperBound(), .000000001d);
+		// assertion that expected value matches the actual value of -159
 	}
 
 	// ----------- tests for equals(Object obj) ----------------
+	/**
+	 * This test will be testing the equals function. We will be testing a null range to see if it 
+	 * returns false when compared to a range object that is not null.
+	 */
 	@Test
 	public void equalsParameterIsNotARangeObjec() {
 		testRange1 = new Range(2, 6);
 		boolean testEqualRanges = testRange1.equals(null);
 		assertFalse("These Range objects are equal.", testEqualRanges);
+		// assertion that expected value is false
 	}
 
+	/**
+	 * This test will be testing the equals function. We will be testing to see if the two Range objects are 
+	 * equal and in this case, they are not equal.
+	 */
 	@Test
 	public void equalsDifferentLowerBound() {
 		testRange1 = new Range(2, 6);
 		boolean testEqualRanges = testRange1.equals(new Range(3, 6));
 		assertFalse("These Range objects are equal.", testEqualRanges);
+		// assertion that expected value is false
 	}
 
+	/**
+	 * This test will be testing the equals function. We will be testing to see if two Range objects are equal
+	 * and in this case, the range objects are not equal.
+	 */
 	@Test
 	public void equalsDifferentUpperBound() {
 		testRange1 = new Range(2, 6);
 		boolean testEqualRanges = testRange1.equals(new Range(2, 5));
 		assertFalse("These Range objects are equal.", testEqualRanges);
+		// assertion that expected value is false
 	}
 
 	// ----------- tests for hashCode() ----------------
+	/**
+	 * This test will be testing the hashCode function. We will be testing to see if the created hashCode
+	 * is correct.
+	 */
 	@Test
 	public void hashCodeTest() {
 		testRange1 = new Range(2, 6);
 		int testHashCodeResult = testRange1.hashCode();
 		assertEquals("This hashcode is incorrect.", -2145910784, testHashCodeResult);
+		// assertion that expected value matches the actual value of -2145910784
 	}
 
 	// ------- tests for double toString() ------------
+	/**
+	 * This test will be testing the toString function. We will be testing to see if the string 
+	 * produced is the range itself.
+	 */
 	@Test
 	public void toStringTest() {
 		testRange1 = new Range(2, 6); // This is creating the range for testing purposes.
 		String message = testRange1.toString();
 		assertEquals("The string is wrong.", message, "Range[2.0,6.0]");
+		// assertion that expected value matches the actual value of Range[2.0,6.0]
 	}
+
+	// ------- tests for constrain -------
+	/**
+	 * This test will be testing the constrain function. We will be testing a value
+	 * that is on the lower boundary of the range.
+	 */
+    	@Test
+    	public void constrainDecrement() {
+        	testRange1 = new Range(1, 4);
+        	double returned = testRange1.constrain(1);
+        	assertEquals("The constrained value should be ", 1, returned, .000000001d);
+		// assertion that expected value matches the actual value of 1
+    	}
 
 	// -----------------------------------------------------------------------------------------
 	// End of Lauraine and Alexis Mutation Code
