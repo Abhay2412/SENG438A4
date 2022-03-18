@@ -110,10 +110,12 @@ Mutation testing and using the Selenium tool was the main focus of this lab assi
 # Analysis drawn on the effectiveness of each of the test classes
 After adding the additional test cases to each test class (detailed in the above section), the effectiveness of each class was improved as follows:
 
+
 ### Range Class
-#### Range New Mutation Score With Tests (91%)
+#### Range New Mutation Score With Tests (78%)
 ![](./Screenshots/RangeV2.png)
-Comparing our mutation scores from the original test set (from Assignment 3) to our updated mutation scores (with our new test cases), we can see an increase of 18% - exceeding the required 10% increase as described in the lab manual. At a mutation test score of 91%, our test set is relatively strong and acceptable to clarify the reliability of the software program. There are a total of 28 mutants that survived.
+Comparing our mutation scores from the original test set (from Assignment 3) to our updated mutation scores (with our new test cases), we can see an increase of 16% - exceeding the required 10% increase as described in the lab manual. At a mutation test score of 78%, our test set is acceptable to clarify the reliability of the software program, but there is still room for improvement. There are a total of 271 mutants that survived.
+
  
 ### DataUtilities Class
 #### DataUtilities New Mutation Score With Tests (99%)
