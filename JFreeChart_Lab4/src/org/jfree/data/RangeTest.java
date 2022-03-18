@@ -1085,9 +1085,11 @@ public class RangeTest {
 	// End of code by Alexis and Rachel
 	// -----------------------------------------------------------------------------------------
 
+	
 	// -----------------------------------------------------------------------------------------
 	// Start of Lab 4
 	// -----------------------------------------------------------------------------------------
+	
 	// -----------------------------------------------------------------------------------------
 	// Start of Lauraine and Alexis Mutation Code
 	// -----------------------------------------------------------------------------------------
@@ -1176,7 +1178,7 @@ public class RangeTest {
 	/**
 	 * This test will be testing the intersects function. We will be testing to see
 	 * if the lower boundary condition is found to intersect with the given range of
-	 * (2,3)
+	 * (2,3).
 	 */
 	@Test
 	public void intersectsBoundary() {
