@@ -79,17 +79,17 @@ Mutation testing and using Selenium tool was the main focus of this lab assignme
 
 # Analysis drawn on the effectiveness of each of the test classes
 After adding the additional test cases to each test class (detailed in the above section), the effectiveness of each class was improved as follows:
-
-## Range Class
-### Range New Mutation Score With Tests (91%)
+ 
+### Range Class
+#### Range New Mutation Score With Tests (91%)
 ![](./Screenshots/RangeV2.png)
-Comparing our mutation scores from original test set (from Assignment 3) to our updated mutation scores (with our new test cases), we can see an increase of 18% - exceeding the required 10% increase as described in the lab manual. At a mutation test score of 91%, our test set is relatively strong and acceptable to clarify the reliability of the software program. 
+Comparing our mutation scores from original test set (from Assignment 3) to our updated mutation scores (with our new test cases), we can see an increase of 18% - exceeding the required 10% increase as described in the lab manual. At a mutation test score of 91%, our test set is relatively strong and acceptable to clarify the reliability of the software program. There are a total of 28 mutants that survived.
  
-## DataUtilities Class
-### DataUtilities New Mutation Score With Tests (99%)
+### DataUtilities Class
+#### DataUtilities New Mutation Score With Tests (99%)
 ![](./Screenshots/DataUtilitiesV2.png)
-Comparing our mutation scores from original test set (from Assignment 3) to our updated mutation scores (with our new test cases), we can see an increase of 3%. While not accomplishing the 10% increase (as it was not possible to exceed 100%), our test set has an acceptable mutant score - deeming our test set to be a successfu in detect software faults and therefore a strong test set.
- 
+Comparing our mutation scores from original test set (from Assignment 3) to our updated mutation scores (with our new test cases), we can see an increase of 3%. While not accomplishing the 10% increase (as it was not possible to exceed 100%), our test set has an acceptable mutant score - deeming our test set to be a successful in detect software faults and therefore a strong test set. There are only two mutants that survived the mutation testing.
+
 # A discussion on the effect of equivalent mutants on mutation score accuracy
 As we learned in class, a mutant is said to be killed when it produces different outputs while running the same test case as the original program; otherwise, it has survived. The mutant score accuracy represents the fault revealing power - the higher the number of killed mutants, the higher is the test case power. In mutation testing, a phenomenon that has causes issues in mutation testing is caused by equivalent mutants. Since equivalent mutants have the same behavior as the original program, the test set does not actually kill the mutant. Due to this, the mutation score accuracy is inaccurate to the actual representation mutant score (representation of the total killed mutants over the total mutations). 
 
