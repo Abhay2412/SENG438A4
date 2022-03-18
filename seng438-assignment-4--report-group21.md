@@ -11,45 +11,45 @@
 
 # Introduction
 Mutation testing and using the Selenium tool was the main focus of this lab assignment as to familiarize ourselves with these concepts first seen in the lectures, for the mutation testing our group decided to use the PIT testing tool to see the mutation coverage in Eclipse. In Part 2 of the lab, we used the Selenium IDE extension on our respective browsers. Additionally, mutation testing was introduced to ensure that the original source code has a high error detection, with the test cases written to catch weak spots of the code which were not tested properly. GUI testing was another focal point in this lab assignment, is a bit of an insight to automating the test cases and primarily on the foundation of a user interface which the user can record/run their scripts. 
-
+ 
 # Analysis of 10 Mutants of the Range class 
 ### Range
-#### 1. toString() 
-**Mutation: Replaced return value with “” → SURVIVED**  
+#### 1. toString()
+**Mutation: Replaced return value with “” → SURVIVED**
 **Analysis:** This mutation survived because, with our original test suite, we did not test the method toString() at all which means there was no coverage for the mutations. We added a new test case that gets the string equivalence of a Range object that has a range from 2 to 6 (the result is “Range[2.0,6.0]). This mutation was killed since if we replace the result with “” (an empty string), the *assertEquals* will fail, which is expected.
-#### 2. contains(double value) 
-**Mutation: Changed conditional boundary → SURVIVED**  
+#### 2. contains(double value)
+**Mutation: Changed conditional boundary → SURVIVED**
 **Analysis:** This mutation survived because, with our original test suite, we did not test what happens when the contains(double value) method is called with a parameter that equals the lower or upper bound of the Range object being tested. By adding two additional test cases, where the range is from 2 to 6 and the value is 2 (lower bound case) or 6 (upper bound case), this mutation was killed since the boundaries are being tested.
-#### 3. intersects(double b0, double b1) 
-**Mutation: Changed conditional boundary → SURVIVED**  
+#### 3. intersects(double b0, double b1)
+**Mutation: Changed conditional boundary → SURVIVED**
 **Analysis:** This mutation survived because, with our original test suite, we did not test what happens when the intersects(double b0, double b1) method is called with the parameter b0 equals the upper bound of the Range object being tested or the parameter b1 equals the lower bound of the Range object being tested. To kill this mutation was and test the boundaries, two new test cases had to be created. In the first test case, we create a Range object that has a range from 2 to 6, and the parameter b0 was equal to 6. In the second test case, we create a Range object that has a range from 2 to 6, and the parameter b1 was equal to 2.
-#### 4. intersects(Range range) 
-**Mutation: Replaced boolean return with true → SURVIVED**  
+#### 4. intersects(Range range)
+**Mutation: Replaced boolean return with true → SURVIVED**
 **Analysis:** This mutation survived because, with our original test suite, we did not test what happens when the intersects(Range range) method is called and the result is a false boolean. By adding another test case where the return value for intersects(Range range) is false (the two Range objects do not intersect), we were able to kill this mutation that replaces the boolean, false, with a true boolean because the *assertFalse* will now fail, as it should with a true boolean.
 #### 5. shiftWithNoZeroCrossing(double value, double delta)
-**Mutation: Replaced double addition with subtraction → SURVIVED**  
+**Mutation: Replaced double addition with subtraction → SURVIVED**
 **Analysis:** This mutation survived because, with our original test suite, we did not test what happens when the shiftWithNoZeroCrossing(double value, double delta) method when the parameter value is negative. By adding another test case where the parameter value was equal to -1, we were able to enter the else if statement where the statement “value + delta” was changed to (value - delta). This test case killed the above mutation because this will now result in a different value than what was in the *assertEquals*, which is the correct thing to do when the addition is changed to a subtraction.
 #### 6. intersects(double b0, double b1) 
-**Mutation: Negated conditional → KILLED**  
+**Mutation: Negated conditional → KILLED**
 **Analysis:** For this mutation, the code segment “if (b0 <= this.lower)” is replaced with “if (b0 < this.lower)”. This means that in our test cases when a value of b0 was sent in that was either equal to this.lower, or b0 was less than this.lower, the following lines of the intersects function caused an incorrect value to be returned. 
-#### 7. expandToInclude(Range range, double value) 
-**Mutation: Replaced return value with null → KILLED**  
+#### 7. expandToInclude(Range range, double value)
+**Mutation: Replaced return value with null → KILLED**
 **Analysis:** This mutation replaced the line: “return new Range(value, value)” with “return null”. The test cases expandToIncludeNullLower and expandToIncludeNullUpper cover this test case because the test cases both expect that the code returns a non-null range that is passed in as the “value” argument. When null is returned by the mutation, the test case fails as it should.
-#### 8. expand(Range range, double lowerMargin, double upperMargin) 
-**Mutation: Replaced double multiplication with division → KILLED**  
+#### 8. expand(Range range, double lowerMargin, double upperMargin)
+**Mutation: Replaced double multiplication with division → KILLED**
 **Analysis:** This mutation changes the statement “double lower = range.getLowerBound() - length * lowerMargin” with “double lower = range.getLowerBound() - length / lowerMargin”. This now computes the division of the two terms instead of the multiplication. The test case expandLowerGreaterThanUpper_Lower() killed this mutation because the lower bound is now incorrect. The new range is returned with the incorrect lower bound, and the test case fails.
-#### 9. shift(Range base, double delta) 
-**Mutation: Incremented (++a) double local variable number 1 → KILLED**  
+#### 9. shift(Range base, double delta)
+**Mutation: Incremented (++a) double local variable number 1 → KILLED**
 **Analysis:** This mutation replaced the variable “delta” with ++delta. When the test ran with our test cases, for example, with the test case shiftByNegativeDoubleLowerBound, the range should have been shifted -2.2 and instead was shifted by -1.2. The test case expected the range to be shifted to 3.8, and the test case would return a range shifted to 4.8 instead and cause the test to fail, which kills the mutation.
-#### 10. scale(Range base, double factor) 
-**Mutation: Negated double local variable number 1 → KILLED**  
+#### 10. scale(Range base, double factor)
+**Mutation: Negated double local variable number 1 → KILLED** 
 **Analysis:** This mutation replaced the “factor” argument with a value of 1 instead. In our test case scalePositiveRangePositiveFactor, a factor of 2 is sent in as an argument with the range (0,6). When the factor of 1 is used in the computation, an incorrect value is returned and the test case fails, killing the mutation.
-
+ 
 # Report all the statistics and the mutation score for each test class
 ## Original Test Scores
 ### Range Original Mutation Score (73%)
 ![](./Screenshots/RangeOriginal.png)
-
+ 
 ### DataUtilities Original Mutation Score (96%)
 ![](./Screenshots/DataUtilitiesOriginal.png)
  
@@ -110,35 +110,46 @@ Mutation testing and using the Selenium tool was the main focus of this lab assi
 
 # Analysis drawn on the effectiveness of each of the test classes
 After adding the additional test cases to each test class (detailed in the above section), the effectiveness of each class was improved as follows:
- 
+
 ### Range Class
 #### Range New Mutation Score With Tests (91%)
 ![](./Screenshots/RangeV2.png)
-Comparing our mutation scores from original test set (from Assignment 3) to our updated mutation scores (with our new test cases), we can see an increase of 18% - exceeding the required 10% increase as described in the lab manual. At a mutation test score of 91%, our test set is relatively strong and acceptable to clarify the reliability of the software program. There are a total of 28 mutants that survived.
+Comparing our mutation scores from the original test set (from Assignment 3) to our updated mutation scores (with our new test cases), we can see an increase of 18% - exceeding the required 10% increase as described in the lab manual. At a mutation test score of 91%, our test set is relatively strong and acceptable to clarify the reliability of the software program. There are a total of 28 mutants that survived.
  
 ### DataUtilities Class
 #### DataUtilities New Mutation Score With Tests (99%)
 ![](./Screenshots/DataUtilitiesV2.png)
-Comparing our mutation scores from original test set (from Assignment 3) to our updated mutation scores (with our new test cases), we can see an increase of 3%. While not accomplishing the 10% increase (as it was not possible to exceed 100%), our test set has an acceptable mutant score - deeming our test set to be a successful in detect software faults and therefore a strong test set. There are only two mutants that survived the mutation testing.
-
+Comparing our mutation scores from the original test set (from Assignment 3) to our updated mutation scores (with our new test cases), we can see an increase of 3%. While not accomplishing the 10% increase (as it was not possible to exceed 100%), our test set has an acceptable mutant score - deeming our test set to be successful in detecting software faults and therefore a strong test set. There are only two mutants that survived the mutation testing.
+ 
 # A discussion on the effect of equivalent mutants on mutation score accuracy
-As we learned in class, a mutant is said to be killed when it produces different outputs while running the same test case as the original program; otherwise, it has survived. The mutant score accuracy represents the fault revealing power - the higher the number of killed mutants, the higher is the test case power. In mutation testing, a phenomenon that has causes issues in mutation testing is caused by equivalent mutants. Since equivalent mutants have the same behavior as the original program, the test set does not actually kill the mutant. Due to this, the mutation score accuracy is inaccurate to the actual representation mutant score (representation of the total killed mutants over the total mutations). 
+As we learned in class, a mutant is said to be killed when it produces different outputs while running the same test case as the original program; otherwise, it has survived. The mutant score accuracy represents the fault revealing power - the higher the number of killed mutants, the higher is the test case power. In mutation testing, a phenomenon that has caused issues in mutation testing is caused by equivalent mutants. Since equivalent mutants have the same behavior as the original program, the test set does not actually kill the mutant. Due to this, the mutation score accuracy is inaccurate to the actual representation mutant score (representation of the total killed mutants over the total mutations). 
 
-# A discussion of what could have been done to improve the mutation score of the test suites
-For the DataUtilties.java our mutation score was already at a near perfect 100% hence not really any wiggle improvement in improving it but as a general idea the goal was to test the boundary conditions which were missed by our original test suite creation. For the Range.java since it was a bigger file it had more mutants hence to improve the score of this we had created additional tests which would check the edge conditions to increase the coverage. This score is based on if the mutants survive or our killed by the tests we had created in the earlier labs. To improve these suits it’s testing the conditional statements as well since the statement which is changed it will be able to kill this mutant and hence we created additional tests to ensure this is performed with proper condition check. Overall the main idea used by the group was to use these statement checks together to have a greater chance in increase the PIT mutation coverage score in the summary section.
-# Why do we need mutation testing? Advantages and disadvantages of mutation testing
-Mutation testing is essential in the Software Development life cycle as it provides in the testing phase an additional verification of the test suite which we have created, it could potentially lead us in to creating additional rests which may have been left out the with bugs that we could not have thought of when generating unit tests. The mutants which are in our code check if the test suite can kill the different conditions, variable values in the statements leading into a more robust test suite for our source code. With each testing coverage tool learnt in the course thus far each possess it’s own advantage and disadvantage which will be explored, some benefits of using mutation testing is that the test cases are being thoroughly verified and validated with the different bug being injected into our source code. It creates for unique test cases with the overall testing suite to become comprehensive in detecting the faults in the classes. Some of the drawbacks which this method of testing introduces is that you cannot guarantee that the mutant will be resolved in every situation in the source code as it does not check the logic implementation of the source code instead it is more for verifying the conditionals. For larger source codes which are being tested there will be a huge amount of mutants which can result into creating a confusion for the test developer to understand the purpose of the mutants in the code. Final reason is that the mutation testing is time heavy on analyzing the mutants which have been survived and potentially be costly for the company which is tight on the budget depending on the requirement outlined for the project.
-# Explain your SELENUIM test case design process
+# A discussion of what could have been done to improve the mutation score of the test suites 
+For the DataUtilties.java our mutation score was already at a near-perfect 100% hence not really any wiggle improvement in improving it but as a general idea, the goal was to test the boundary conditions which were missed by our original test suite creation. For the Range.java since it was a bigger file it had more mutants hence to improve the score of this we had created additional tests which would check the edge conditions to increase the coverage. This score is based on if the mutants survive or our killed by the tests we had created in the earlier labs. To improve these suites, it’s testing the conditional statements as well since the statement which is changed will be able to kill this mutant and hence we created additional tests to ensure this is performed with proper condition check. Overall the main idea used by the group was to use these statement checks together to have a greater chance in increase the PIT mutation coverage score in the summary section. 
+
+# Why do we need mutation testing? Advantages and disadvantages of mutation testing 
+Mutation testing is essential in the Software Development life cycle as it provides in the testing phase an additional verification of the test suite which we have created, it could potentially lead us to create additional rests which may have been left out with bugs that we could not have thought of when generating unit tests. The mutants which are in our code check if the test suite can kill the different conditions, variable values in the statements leading to a more robust test suite for our source code. With each testing coverage tool learnt in the course thus far, each possesses its own advantage and disadvantage which will be explored. Some benefits of using mutation testing are that the test cases are being thoroughly verified and validated with the different bugs being injected into our source code. It creates unique test cases with the overall testing suite to become comprehensive in detecting the faults in the classes. Some of the drawbacks that this method of testing introduces is that you cannot guarantee that the mutant will be resolved in every situation in the source code as it does not check the logic implementation of the source code instead it is more for verifying the conditionals. For larger source codes that are being tested, there will be a huge amount of mutants which can result in creating confusion for the test developer to understand the purpose of the mutants in the code. The final reason is that the mutation testing is time heavy on analyzing the mutants which have been survived and potentially be costly for the company which is tight on the budget depending on the requirement outlined for the project.
+
+# Explain your SELENIUM test case design process
+When designing our Selenium test cases, we first explored the website to understand all the different functionalities that we could test. We made a list of these functions, which included logging into the system, adding an item to the cart, searching for an item and one that doesn’t exist, etc., and then executed each function with some test inputs. Once we were familiar with the site and its workings, we started writing the test cases into Selenium one by one. We ended up having 12 cases to test the functionality of the system, some of which had multiple tests such as logging in with a valid username and invalid username, as well as some standalone test cases such as testing a gift card code with an invalid code. We wanted to test all the major system functionalities and those that required typing into various fields instead of ones that just involved redirections within the site. This way we could ensure that the website was redirecting correctly, and also using the data being input correctly. 
 
 # Explain the use of assertions and checkpoints
+Assertions and checkpoints (or validations) are used by Selenium to ensure that the system behaves as expected. This is done automatically by the application, which makes them straightforward to use. Selenium places these validations after any form of user input occurs such as a mouse click, scroll, or text is inputted. When running the test case, if one of the inputs is unexpected or incorrect, the case will stop and fail at that checkpoint. This works similar to the JUnit testing, which will return a failure if the assertion fails. 
 
-# how did you test each functionaity with different test data
+# How did you test each functionality with different test data
+When running the test cases, we were able to change the “Value” field in Selenium after the test case was finished recording. This allowed us to test different data and ensure the test behaved as expected. If we had recorded additional input to the test case after the input was used, for example, if we used the store selector to search for stores in Calgary, and then selected one of the stores, the test case would fail if we changed the input to Edmonton because the redirection to the Calgary store is not accessible from the Edmonton store locator. There were some test cases that we decided to create multiple test cases for, such as logging in with a correct and incorrect username because each feature ended in different outputs and we wanted to store both outputs as tests. 
 
 # Discuss advantages and disadvantages of Selenium vs. Sikulix
+Selenium uses locators based on HTML code to store the user’s input to the UI. 
+Sikulix uses image recognition to store user decisions. 
 
-# How the team work/effort was divided and managed
-
+# How the teamwork/effort was divided and managed
+Our team started by working on the Selenium tests. We each investigated the BestBuy website individually and determined 2 functionalities that we could test. A few of these tests had to be chained together, for example, logging in and selecting an item to purchase, adding it to our cart and checking out, and finally logging out of the account. Once we had determined our test cases, we used Alexis’ computer to create a test suite and write each of our test cases on. After each test case was written, the member who came up with the test would watch the test run to ensure that it performed as expected. Once all the test cases were written and executed, the whole test suite was executed to see how it would run as a whole. 
+ 
+We then moved over to the mutation testing and spent some time investigating and running the DataUtilities and Range test classes through PiTest. Once we understood how the software worked, we split into pairs to investigate the mutations and determine how to improve the mutation coverage scores. Both pairs, consisting of Abhay and Rachel, and Lauraine and Alexis, used pair programming to write all the mutation tests. One member programmed the tests while the other assisted and helped them come up with the logic needed to perform the test, and then the pairs switched roles. Once all the mutations were written, we ran both programs to ensure that the mutation coverage scores had improved by 10% in the case of Range, and reached 99% in the case of DataUtilities. 
 
 # Difficulties encountered, challenges overcome, and lessons learned
+Our team found it quite difficult to learn how to use PiTest. There was no documentation provided, and the lab document was not clear on how the tests for each class should have been divided and run. We initially experienced many issues running PiTest and were instructed to move onto the Selenium section instead. We were under the impression that the TAs would reach out to us and explain how to fix the issues we were facing, but we had not received any emails and had to ask others in the class whose software worked to help us run the code without failure. The main challenge was that we could not run the test class if any tests failed, and we had to fix these issues before attempting to run the mutation coverage. Another challenge that we faced was that PiTest took a long time to run on some group members’ machines and not as long on others. This made re-running the mutations a lengthy process and forced us to program on Rachel and Lauraine’s computers since theirs ran faster and did not have any issues. Another challenge we faced was with Selenium and determining how the validation was executed. We initially didn’t know that it was done automatically but once we understood how it worked, we were able to use the software without any issues. 
 
 # Comments/feedback on the lab itself
+This lab was quite time-consuming, as it was not obvious how to use both Selenium and PiTest. Some more in-depth instructions about knowing which errors to ignore and how to interpret the results of PiTest would have been quite helpful. For Selenium, it would have been helpful to see an example of the validation performed by the software when running a test case. We would have saved quite a bit of time if this had been provided to us. Overall, our group enjoyed using Selenium more than PiTest because it was more user-friendly and easier to understand. We could also run the tests much faster on Selenium and didn’t waste any time waiting for a report to compile, unlike PiTest. Now that we understand how to use both tools, we can see ourselves using the software for future projects. PiTest would be helpful to ensure that a class is being fully tested, and Selenium would be useful for GUI testing.
