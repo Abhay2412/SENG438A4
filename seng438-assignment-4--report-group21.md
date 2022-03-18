@@ -15,8 +15,8 @@ Mutation testing and using the Selenium tool was the main focus of this lab assi
 # Analysis of 10 Mutants of the Range class 
 ### Range
 #### 1. toString() (Line 132)
-Mutation: Replaced return value with “” → SURVIVED  
-Analysis: This mutation survived because, with our original test suite, we did not test the method toString() at all which means there was no coverage for the mutations. We added a new test case that gets the string equivalence of a Range object that has a range from 2 to 6 (the result is “Range[2.0,6.0]). This mutation was killed since if we replace the result with “” (an empty string), the *assertEquals* will fail, which is expected.
+**Mutation: Replaced return value with “” → SURVIVED**  
+**Analysis:** This mutation survived because, with our original test suite, we did not test the method toString() at all which means there was no coverage for the mutations. We added a new test case that gets the string equivalence of a Range object that has a range from 2 to 6 (the result is “Range[2.0,6.0]). This mutation was killed since if we replace the result with “” (an empty string), the *assertEquals* will fail, which is expected.
 #### 2. contains(double value) (Line 144)
 Mutation: Changed conditional boundary → SURVIVED
 Analysis: This mutation survived because, with our original test suite, we did not test what happens when the contains(double value) method is called with a parameter that equals the lower or upper bound of the Range object being tested. By adding two additional test cases, where the range is from 2 to 6 and the value is 2 (lower bound case) or 6 (upper bound case), this mutation was killed since the boundaries are being tested.
