@@ -1182,19 +1182,6 @@ public class RangeTest {
 	 */
 	@Test
 	public void intersectsBoundary() {
-		// boundary line 157
-		testRange1 = new Range(2, 3);
-		boolean returned = testRange1.intersects(2, 2);
-		assertFalse("The range was true when it should be false", returned);
-	}
-
-	/**
-	 * This test will be testing the intersects function. We will be testing to see
-	 * if an increment mutation will change the output.
-	 */
-	@Test
-	public void intersectsIncrement() {
-		// increment line 158 (++a should be false)
 		testRange1 = new Range(2, 3);
 		boolean returned = testRange1.intersects(2, 2);
 		assertFalse("The range was true when it should be false", returned);
