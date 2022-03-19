@@ -50,7 +50,7 @@ Mutation testing and using the Selenium tool was the main focus of this lab assi
 ### Range Original Mutation Score (62%)
 ![](./Screenshots/RangeOriginal.png)
  
-### DataUtilities Original Mutation Score (96%)
+### DataUtilities Original Mutation Score (89%)
 ![](./Screenshots/DataUtilitiesOriginal.png)
  
 ## Improved statistics
